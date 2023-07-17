@@ -1,24 +1,32 @@
 spring:
   application:
     name: incloo-api
-  # PostgreSQL
   datasource:
-    url: jdbc:postgresql://localhost:5432/incloo-api
-    username: postgres
-    password: root
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
 
 server:
+  port: ${SERVER_PORT:0}
   error:
-    include-stacktrace: never
+    include-stacktrace: NEVER
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 eureka:
   instance:
-    hostname: localhost
+    prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
+
+    register-with-eureka: true
     fetch-registry: false
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:8761/eureka
+      defaultZone: http://${EUREKA_SERVICE_NAME:localhost}:8761/eureka
