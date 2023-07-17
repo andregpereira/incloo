@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: incloo-api
+  # PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5432/incloo-api
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+server:
+  error:
+    include-stacktrace: never
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka
