@@ -20,4 +20,5 @@ public record UsuarioDto(Long id,
         boolean ativo,
         Set<VulnerabilidadeSocial> vulnerabilidadesSociais,
         Set<Deficiencia> deficiencias) {
+
 }

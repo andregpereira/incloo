@@ -12,4 +12,5 @@ public record UsuarioUpdateDto(@NotBlank(message = "O nome é obrigatório") Str
         @NotBlank(message = "O celular é obrigatório") String celular,
         Set<VulnerabilidadeSocial> vulnerabilidadesSociais,
         Set<Deficiencia> deficiencias) {
+
 }
