@@ -3,10 +3,12 @@ package com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario;
 import com.andregpereira.challenges.incloo.inclooapi.app.constant.Deficiencia;
 import com.andregpereira.challenges.incloo.inclooapi.app.constant.VulnerabilidadeSocial;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
 
 import java.time.LocalDate;
 import java.util.Set;
 
+@Builder
 public record UsuarioDto(Long id,
         String nome,
         String sobrenome,
