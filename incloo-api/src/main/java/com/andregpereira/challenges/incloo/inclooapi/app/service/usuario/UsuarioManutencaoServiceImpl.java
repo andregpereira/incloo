@@ -25,8 +25,8 @@ public non-sealed class UsuarioManutencaoServiceImpl implements UsuarioManutenca
     }
 
     @Override
-    public UsuarioDto update(UsuarioUpdateDto dto) {
-        return mapper.toUsuarioDto(updateUc.update(mapper.toUsuario(dto)));
+    public UsuarioDto update(Long id, UsuarioUpdateDto dto) {
+        return mapper.toUsuarioDto(updateUc.update(id, mapper.toUsuario(dto)));
     }
 
     @Override

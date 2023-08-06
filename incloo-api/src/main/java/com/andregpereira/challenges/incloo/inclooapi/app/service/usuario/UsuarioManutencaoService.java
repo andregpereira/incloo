@@ -8,7 +8,7 @@ public sealed interface UsuarioManutencaoService permits UsuarioManutencaoServic
 
     UsuarioDto create(UsuarioCreateDto dto);
 
-    UsuarioDto update(UsuarioUpdateDto dto);
+    UsuarioDto update(Long id, UsuarioUpdateDto dto);
 
     void activate(Long id);
 
