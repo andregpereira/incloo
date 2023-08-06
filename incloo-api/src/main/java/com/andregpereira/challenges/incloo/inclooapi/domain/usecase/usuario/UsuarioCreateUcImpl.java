@@ -1,5 +1,6 @@
 package com.andregpereira.challenges.incloo.inclooapi.domain.usecase.usuario;
 
+import com.andregpereira.challenges.incloo.inclooapi.cross.exception.UsuarioAlreadyExistsException;
 import com.andregpereira.challenges.incloo.inclooapi.domain.gateway.UsuarioGateway;
 import com.andregpereira.challenges.incloo.inclooapi.domain.model.Usuario;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,11 @@ public non-sealed class UsuarioCreateUcImpl implements UsuarioCreateUc {
 
     @Override
     public Usuario create(Usuario usuario) {
-        usuario.setAtivo(true);
+        if (gateway.existsByCpf(usuario.getCpf()))
+            throw new UsuarioAlreadyExistsException("CPF");
+        else if (gateway.existsByEmail(usuario.getEmail()))
+            throw new UsuarioAlreadyExistsException("e-mail");
+        usuario.setCpf(usuario.getCpf().replaceAll("[.-]", ""));
         return gateway.save(usuario);
     }
 
