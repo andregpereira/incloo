@@ -9,7 +9,7 @@ import java.text.MessageFormat;
 
 public class UsuarioNotFoundException extends ErrorResponseException {
 
-    private static final HttpStatusCode status = HttpStatus.CONFLICT;
+    private static final HttpStatusCode status = HttpStatus.NOT_FOUND;
 
     public UsuarioNotFoundException(Long id) {
         super(status, asProblemDetail(MessageFormat.format("Ops! Nenhum usuário com id {0} foi encontrado", id)), null);
