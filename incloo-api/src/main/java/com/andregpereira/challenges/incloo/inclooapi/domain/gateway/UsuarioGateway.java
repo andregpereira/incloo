@@ -10,6 +10,8 @@ public interface UsuarioGateway {
 
     boolean existsByCpf(String cpf);
 
+    boolean existsByEmail(String email);
+
     Page<Usuario> findAll(Pageable pageable);
 
     Usuario findById(Long id);
