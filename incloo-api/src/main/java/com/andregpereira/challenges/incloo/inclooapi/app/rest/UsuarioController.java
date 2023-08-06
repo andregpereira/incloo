@@ -40,7 +40,7 @@ public class UsuarioController {
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioDto> update(@PathVariable Long id, @RequestBody @Valid UsuarioUpdateDto dto) {
         log.info("Atualizando usuário...");
-        UsuarioDto usuario = manutencaoService.update(dto);
+        UsuarioDto usuario = manutencaoService.update(id, dto);
         log.info("Usuário atualizado com sucesso");
         URI uri = UriComponentsBuilder.fromPath("/usuarios/{id}").buildAndExpand(usuario.id()).toUri();
         return ResponseEntity.ok().location(uri).body(usuario);
