@@ -3,6 +3,7 @@ package com.andregpereira.challenges.incloo.inclooapi.domain.model;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
@@ -21,8 +22,8 @@ public class Usuario {
     private String email;
     private String celular;
     private LocalDate dataNascimento;
-    private Set<String> vulnerabilidadesSociais;
-    private Set<String> deficiencias;
+    private Set<String> vulnerabilidadesSociais = new HashSet<>();
+    private Set<String> deficiencias = new HashSet<>();
     private int idade;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
