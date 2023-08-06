@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
@@ -49,8 +50,8 @@ public class UsuarioEntity implements Serializable {
     @Column(nullable = false)
     private LocalDate dataNascimento;
 
-    private Set<String> vulnerabilidadesSociais;
-    private Set<String> deficiencias;
+    private Set<String> vulnerabilidadesSociais = new HashSet<>();
+    private Set<String> deficiencias = new HashSet<>();
 
     @Transient
     private int idade;
