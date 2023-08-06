@@ -15,6 +15,11 @@ public class UsuarioNotFoundException extends ErrorResponseException {
         super(status, asProblemDetail(MessageFormat.format("Ops! Nenhum usuário com id {0} foi encontrado", id)), null);
     }
 
+    public UsuarioNotFoundException(Long id, boolean ativo) {
+        super(status, asProblemDetail(MessageFormat.format("Ops! Nenhum usuário {1} com id {0} foi encontrado", id,
+                ativo ? "ativo" : "inativo")), null);
+    }
+
     private static ProblemDetail asProblemDetail(String msg) {
         ProblemDetail pd = ProblemDetail.forStatusAndDetail(status, msg);
         pd.setTitle("Usuário não encontrado");
