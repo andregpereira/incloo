@@ -5,6 +5,7 @@ import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioUpdateDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.service.usuario.UsuarioConsultaService;
 import com.andregpereira.challenges.incloo.inclooapi.app.service.usuario.UsuarioManutencaoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -28,7 +29,7 @@ public class UsuarioController {
     private final UsuarioConsultaService consultaService;
 
     @PostMapping
-    public ResponseEntity<UsuarioDto> create(@RequestBody UsuarioCreateDto dto) {
+    public ResponseEntity<UsuarioDto> create(@RequestBody @Valid UsuarioCreateDto dto) {
         log.info("Criando usuário...");
         UsuarioDto usuario = manutencaoService.create(dto);
         log.info("Usuário criado com sucesso");
@@ -37,7 +38,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioDto> update(@PathVariable Long id, @RequestBody UsuarioUpdateDto dto) {
+    public ResponseEntity<UsuarioDto> update(@PathVariable Long id, @RequestBody @Valid UsuarioUpdateDto dto) {
         log.info("Atualizando usuário...");
         UsuarioDto usuario = manutencaoService.update(dto);
         log.info("Usuário atualizado com sucesso");
