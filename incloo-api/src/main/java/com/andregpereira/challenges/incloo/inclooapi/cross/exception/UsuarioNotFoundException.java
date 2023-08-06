@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.ErrorResponseException;
 
+import java.net.URI;
 import java.text.MessageFormat;
 
 public class UsuarioNotFoundException extends ErrorResponseException {
@@ -21,13 +22,15 @@ public class UsuarioNotFoundException extends ErrorResponseException {
     }
 
     public UsuarioNotFoundException(String cpf) {
-        super(status, asProblemDetail(MessageFormat.format("Ops! Nenhum usuário com CPF {0} foi encontrado", cpf)),
+        super(status,
+                asProblemDetail(MessageFormat.format("Ops! Nenhum usuário ativo com CPF {0} foi encontrado", cpf)),
                 null);
     }
 
     private static ProblemDetail asProblemDetail(String msg) {
         ProblemDetail pd = ProblemDetail.forStatusAndDetail(status, msg);
         pd.setTitle("Usuário não encontrado");
+        pd.setType(URI.create("http://incloo.com/errors/not-found"));
         return pd;
     }
 
