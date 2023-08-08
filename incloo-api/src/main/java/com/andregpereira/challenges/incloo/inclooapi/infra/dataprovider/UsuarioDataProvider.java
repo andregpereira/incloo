@@ -42,6 +42,11 @@ public class UsuarioDataProvider implements UsuarioGateway {
     }
 
     @Override
+    public Page<Usuario> findByNome(String nome, Pageable pageable) {
+        return repository.findByNome(nome, pageable).map(mapper::toUsuario);
+    }
+
+    @Override
     public Usuario findById(Long id) {
         return repository.findById(id).map(mapper::toUsuario).orElseThrow(() -> new UsuarioNotFoundException(id));
     }
@@ -60,13 +65,14 @@ public class UsuarioDataProvider implements UsuarioGateway {
 
     @Override
     public Usuario findByCpf(String cpf) {
-        return repository.findByCpf(cpf).map(mapper::toUsuario).orElseThrow(() -> new UsuarioNotFoundException(cpf));
+        return repository.findByCpf(cpf).map(mapper::toUsuario).orElseThrow(
+                () -> new UsuarioNotFoundException("CPF", cpf));
     }
 
     @Override
-    public Page<Usuario> findByNome(String nome) {
-        // TODO
-        return null;
+    public Usuario findByEmail(String email) {
+        return repository.findByEmailAndAtivoTrue(email).map(mapper::toUsuario).orElseThrow(
+                () -> new UsuarioNotFoundException("e-mail", email));
     }
 
 }
