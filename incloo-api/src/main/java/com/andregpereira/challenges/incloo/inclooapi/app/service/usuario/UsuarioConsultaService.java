@@ -8,10 +8,12 @@ public sealed interface UsuarioConsultaService permits UsuarioConsultaServiceImp
 
     Page<UsuarioDto> findAll(Pageable pageable);
 
+    Page<UsuarioDto> findByNome(String nome, Pageable pageable);
+
     UsuarioDto findById(Long id);
 
     UsuarioDto findByCpf(String cpf);
 
-    UsuarioDto findByNome(String nome);
+    UsuarioDto findByEmail(String email);
 
 }
