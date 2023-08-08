@@ -22,7 +22,7 @@ public class InclooApiExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleErrorResponseException(ErrorResponseException ex, HttpHeaders headers,
             HttpStatusCode status, WebRequest request) {
         log.warn(LOG_TRATANDO_EXCECAO, ex.toString());
-        return super.handleErrorResponseException(ex, headers, status, request);
+        return super.handleExceptionInternal(ex, null, headers, status, request);
     }
 
     @Override
@@ -32,11 +32,11 @@ public class InclooApiExceptionHandler extends ResponseEntityExceptionHandler {
         ProblemDetail body = ex.getBody();
         body.setTitle("Campos inválidos");
         body.setProperty("errors", ex.getFieldErrors().stream().map(DadoInvalido::new));
-        return super.handleMethodArgumentNotValid(ex, headers, status, request);
+        return super.handleExceptionInternal(ex, null, headers, status, request);
     }
 
     private record DadoInvalido(String campo,
-            String msg) {
+            String mensagem) {
 
         public DadoInvalido(FieldError erro) {
             this(erro.getField(), erro.getDefaultMessage());
