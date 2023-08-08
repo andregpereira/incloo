@@ -21,10 +21,9 @@ public class UsuarioNotFoundException extends ErrorResponseException {
                 ativo ? "ativo" : "inativo")), null);
     }
 
-    public UsuarioNotFoundException(String cpf) {
-        super(status,
-                asProblemDetail(MessageFormat.format("Ops! Nenhum usuário ativo com CPF {0} foi encontrado", cpf)),
-                null);
+    public UsuarioNotFoundException(String atributo, String valor) {
+        super(status, asProblemDetail(
+                MessageFormat.format("Ops! Nenhum usuário ativo com {0} {1} foi encontrado", atributo, valor)), null);
     }
 
     private static ProblemDetail asProblemDetail(String msg) {
