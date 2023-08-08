@@ -4,9 +4,7 @@ import com.andregpereira.challenges.incloo.inclooapi.domain.model.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface UsuarioGateway {
-
-    Usuario save(Usuario usuario);
+public interface UsuarioGateway extends BaseGateway<Usuario> {
 
     boolean existsByCpf(String cpf);
 
@@ -14,14 +12,10 @@ public interface UsuarioGateway {
 
     Page<Usuario> findAll(Pageable pageable);
 
-    Usuario findById(Long id);
-
-    Usuario findByIdAndAtivoTrue(Long id);
-
-    Usuario findByIdAndAtivoFalse(Long id);
+    Page<Usuario> findByNome(String nome, Pageable pageable);
 
     Usuario findByCpf(String cpf);
 
-    Page<Usuario> findByNome(String nome);
+    Usuario findByEmail(String email);
 
 }
