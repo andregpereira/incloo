@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -54,15 +56,21 @@ public class VagaDataProvider implements VagaGateway {
     }
 
     @Override
-    public Vaga findByIdAndAtivoTrue(Long id) {
-        return repository.findByIdAndAtivoTrue(id).map(mapper::toVaga).orElseThrow(
-                () -> new VagaNotFoundException(id, true));
+    public Vaga findByIdAndAtivoTrue(Long id, UnaryOperator<Vaga> op) {
+        return op.apply(repository.findByIdAndAtivoTrue(id).map(mapper::toVaga).orElseThrow(
+                () -> new VagaNotFoundException(id, true)));
     }
 
     @Override
-    public Vaga findByIdAndAtivoFalse(Long id) {
-        return repository.findByIdAndAtivoFalse(id).map(mapper::toVaga).orElseThrow(
-                () -> new VagaNotFoundException(id, false));
+    public void findByIdAndAtivoTrue(Long id, Consumer<Vaga> op) {
+        op.accept(repository.findByIdAndAtivoTrue(id).map(mapper::toVaga).orElseThrow(
+                () -> new VagaNotFoundException(id, true)));
+    }
+
+    @Override
+    public void findByIdAndAtivoFalse(Long id, Consumer<Vaga> op) {
+        op.accept(repository.findByIdAndAtivoFalse(id).map(mapper::toVaga).orElseThrow(
+                () -> new VagaNotFoundException(id, false)));
     }
 
 }

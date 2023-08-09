@@ -12,6 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
+
 @RequiredArgsConstructor
 @Slf4j
 @Service
@@ -52,15 +55,21 @@ public class UsuarioDataProvider implements UsuarioGateway {
     }
 
     @Override
-    public Usuario findByIdAndAtivoTrue(Long id) {
-        return repository.findByIdAndAtivoTrue(id).map(mapper::toUsuario).orElseThrow(
-                () -> new UsuarioNotFoundException(id, true));
+    public Usuario findByIdAndAtivoTrue(Long id, UnaryOperator<Usuario> op) {
+        return op.apply(repository.findByIdAndAtivoTrue(id).map(mapper::toUsuario).orElseThrow(
+                () -> new UsuarioNotFoundException(id, true)));
     }
 
     @Override
-    public Usuario findByIdAndAtivoFalse(Long id) {
-        return repository.findByIdAndAtivoFalse(id).map(mapper::toUsuario).orElseThrow(
-                () -> new UsuarioNotFoundException(id, false));
+    public void findByIdAndAtivoTrue(Long id, Consumer<Usuario> op) {
+        op.accept(repository.findByIdAndAtivoTrue(id).map(mapper::toUsuario).orElseThrow(
+                () -> new UsuarioNotFoundException(id, true)));
+    }
+
+    @Override
+    public void findByIdAndAtivoFalse(Long id, Consumer<Usuario> op) {
+        op.accept(repository.findByIdAndAtivoFalse(id).map(mapper::toUsuario).orElseThrow(
+                () -> new UsuarioNotFoundException(id, false)));
     }
 
     @Override
