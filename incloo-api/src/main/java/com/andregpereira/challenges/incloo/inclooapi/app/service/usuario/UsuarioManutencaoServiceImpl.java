@@ -4,7 +4,9 @@ import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioCrea
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioUpdateDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.mapper.UsuarioServiceMapper;
+import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.usuario.UsuarioActivateUc;
 import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.usuario.UsuarioCreateUc;
+import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.usuario.UsuarioDeactivateUc;
 import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.usuario.UsuarioUpdateUc;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,8 @@ public non-sealed class UsuarioManutencaoServiceImpl implements UsuarioManutenca
 
     private final UsuarioCreateUc createUc;
     private final UsuarioUpdateUc updateUc;
+    private final UsuarioActivateUc activateUc;
+    private final UsuarioDeactivateUc deactivateUc;
     private final UsuarioServiceMapper mapper;
 
     @Override
@@ -31,12 +35,12 @@ public non-sealed class UsuarioManutencaoServiceImpl implements UsuarioManutenca
 
     @Override
     public void activate(Long id) {
-        // TODO
+        activateUc.activate(id);
     }
 
     @Override
     public void deactivate(Long id) {
-        // TODO
+        deactivateUc.deactivate(id);
     }
 
 }
