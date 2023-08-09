@@ -16,14 +16,15 @@ public non-sealed class UsuarioUpdateUcImpl implements UsuarioUpdateUc {
 
     @Override
     public Usuario update(Long id, Usuario usuarioAtualizado) {
-        if (gateway.existsByEmail(usuarioAtualizado.getEmail()))
-            throw new UsuarioAlreadyExistsException("e-mail");
-        Usuario usuario = gateway.findByIdAndAtivoTrue(id);
-        usuario.setNome(usuarioAtualizado.getNome());
-        usuario.setSobrenome(usuarioAtualizado.getSobrenome());
-        usuario.setEmail(usuarioAtualizado.getEmail());
-        usuario.setCelular(usuarioAtualizado.getCelular());
-        return gateway.save(usuario);
+        return gateway.findByIdAndAtivoTrue(id, u -> {
+            if (gateway.existsByEmail(usuarioAtualizado.getEmail()))
+                throw new UsuarioAlreadyExistsException("e-mail");
+            u.setNome(usuarioAtualizado.getNome());
+            u.setSobrenome(usuarioAtualizado.getSobrenome());
+            u.setEmail(usuarioAtualizado.getEmail());
+            u.setCelular(usuarioAtualizado.getCelular());
+            return gateway.save(u);
+        });
     }
 
 }
