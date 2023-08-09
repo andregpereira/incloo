@@ -1,8 +1,8 @@
 package com.andregpereira.challenges.incloo.inclooapi.app.service;
 
-public interface ManutencaoService<T, U, R> {
+public interface ManutencaoService<C, U, R> {
 
-    R create(T dto);
+    R create(C dto);
 
     R update(Long id, U dto);
 
