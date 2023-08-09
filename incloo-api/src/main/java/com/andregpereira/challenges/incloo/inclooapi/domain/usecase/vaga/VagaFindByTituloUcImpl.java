@@ -16,8 +16,8 @@ public non-sealed class VagaFindByTituloUcImpl implements VagaFindByTituloUc {
     private final VagaGateway gateway;
 
     @Override
-    public Page<Vaga> findByTitulo(Vaga vaga, Pageable pageable) {
-        return gateway.findByTitulo(vaga.getTitulo(), pageable);
+    public Page<Vaga> findByTitulo(String titulo, Pageable pageable) {
+        return gateway.findByTitulo(titulo, pageable);
     }
 
 }

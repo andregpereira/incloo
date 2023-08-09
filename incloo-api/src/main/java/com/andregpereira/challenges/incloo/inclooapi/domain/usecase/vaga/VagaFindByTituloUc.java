@@ -6,6 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 public sealed interface VagaFindByTituloUc permits VagaFindByTituloUcImpl {
 
-    Page<Vaga> findByTitulo(Vaga vaga, Pageable pageable);
+    Page<Vaga> findByTitulo(String titulo, Pageable pageable);
 
 }
