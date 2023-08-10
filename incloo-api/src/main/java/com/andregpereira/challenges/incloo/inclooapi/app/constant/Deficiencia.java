@@ -7,8 +7,10 @@ import java.util.stream.Stream;
 public enum Deficiencia {
     VISUAL,
     AUDITIVA,
-    MOTORA,
-    INTELECTUAL;
+    FISICA,
+    INTELECTUAL,
+    PSICOSSOCIAL,
+    MULTIPLA;
 
     @JsonCreator
     public static Deficiencia findByNome(String nome) {
