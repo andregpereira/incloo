@@ -1,5 +1,6 @@
 package com.andregpereira.challenges.incloo.inclooapi.app.rest;
 
+import com.andregpereira.challenges.incloo.inclooapi.app.constant.VulnerabilidadeSocial;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.vaga.VagaCreateDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.vaga.VagaDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.service.vaga.VagaConsultaService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -71,6 +73,13 @@ public class VagaController {
     public ResponseEntity<Page<VagaDto>> findByTitulo(@RequestParam String titulo,
             @PageableDefault(sort = "titulo") Pageable pageable) {
         return ResponseEntity.ok(consultaService.findByTitulo(titulo, pageable));
+    }
+
+    @GetMapping("/publicos-alvos")
+    public ResponseEntity<Page<VagaDto>> findByPublicosAlvos(
+            @RequestParam("publicos") Set<VulnerabilidadeSocial> publicosAlvos,
+            @PageableDefault(sort = "publicosAlvos") Pageable pageable) {
+        return ResponseEntity.ok(consultaService.findByPublicosAlvos(publicosAlvos, pageable));
     }
 
 }
