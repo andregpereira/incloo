@@ -46,6 +46,18 @@ public class UsuarioController {
         return ResponseEntity.ok().location(uri).body(usuario);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> activate(@PathVariable Long id) {
+        manutencaoService.activate(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deactivate(@PathVariable Long id) {
+        manutencaoService.deactivate(id);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping
     public ResponseEntity<Page<UsuarioDto>> findAll(@PageableDefault(sort = "id") Pageable pageable) {
         return ResponseEntity.ok(consultaService.findAll(pageable));
@@ -54,6 +66,17 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(consultaService.findById(id));
+    }
+
+    @GetMapping("/cpf")
+    public ResponseEntity<UsuarioDto> findByCpf(@RequestParam String cpf) {
+        return ResponseEntity.ok(consultaService.findByCpf(cpf));
+    }
+
+    @GetMapping("/nome")
+    public ResponseEntity<Page<UsuarioDto>> findByNome(@RequestParam String nome,
+            @PageableDefault(sort = "nome") Pageable pageable) {
+        return ResponseEntity.ok(consultaService.findByNome(nome, pageable));
     }
 
 }
