@@ -8,7 +8,11 @@ import java.util.stream.Stream;
 @Getter
 public enum VulnerabilidadeSocial {
     INDIGENA,
-    LGBT;
+    LGBTQIA,
+    NEGRO,
+    BAIXA_RENDA,
+    PCD,
+    QUARENTA_ANOS_MAIS;
 
     @JsonCreator
     public static VulnerabilidadeSocial findByNome(String nome) {
