@@ -16,7 +16,7 @@ public non-sealed class VagaUpdateUcImpl implements VagaUpdateUc {
 
     @Override
     public Vaga update(Long id, Vaga vaga) {
-        if (gateway.existsByTitulo(vaga.getTitulo()))
+        if (gateway.existsByTitulo(vaga.getTitle()))
             throw new VagaAlreadyExistsException();
         return gateway.save(vaga);
     }

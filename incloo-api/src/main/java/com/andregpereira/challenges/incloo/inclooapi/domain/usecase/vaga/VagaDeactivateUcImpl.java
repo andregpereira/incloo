@@ -15,7 +15,7 @@ public non-sealed class VagaDeactivateUcImpl implements VagaDeactivateUc {
     @Override
     public void deactivate(Long id) {
         gateway.findByIdAndAtivoTrue(id, v -> {
-            v.setAtivo(false);
+            v.setActive(false);
             gateway.save(v);
         });
     }

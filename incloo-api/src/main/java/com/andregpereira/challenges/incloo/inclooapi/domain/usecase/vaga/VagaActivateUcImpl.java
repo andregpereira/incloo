@@ -15,7 +15,7 @@ public non-sealed class VagaActivateUcImpl implements VagaActivateUc {
     @Override
     public void activate(Long id) {
         gateway.findByIdAndAtivoFalse(id, v -> {
-            v.setAtivo(true);
+            v.setActive(true);
             gateway.save(v);
         });
     }
