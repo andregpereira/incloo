@@ -1,7 +1,6 @@
 package com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario;
 
-import com.andregpereira.challenges.incloo.inclooapi.app.constant.Deficiencia;
-import com.andregpereira.challenges.incloo.inclooapi.app.constant.VulnerabilidadeSocial;
+import com.andregpereira.challenges.incloo.inclooapi.app.dto.vaga.VagaDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 
@@ -10,17 +9,19 @@ import java.util.Set;
 
 @Builder
 public record UsuarioDto(Long id,
-        String nome,
-        String sobrenome,
+        String name,
+        String lastName,
         String cpf,
         String email,
-        String celular,
-        @JsonFormat(pattern = "dd/MM/uuuu") LocalDate dataNascimento,
-        int idade,
-        @JsonFormat(pattern = "dd/MM/uuuu") LocalDate dataCriacao,
-        @JsonFormat(pattern = "dd/MM/uuuu") LocalDate dataModificacao,
-        boolean ativo,
-        Set<VulnerabilidadeSocial> vulnerabilidadesSociais,
-        Set<Deficiencia> deficiencias) {
+        String mobileNumber,
+        @JsonFormat(pattern = "dd/MM/uuuu") LocalDate birthDate,
+        Integer age,
+        String ethnicity,
+        Boolean lgbtqia,
+        String disability,
+        @JsonFormat(pattern = "dd/MM/uuuu") LocalDate createdDate,
+        @JsonFormat(pattern = "dd/MM/uuuu") LocalDate lastModifiedDate,
+        boolean active,
+        Set<VagaDto> vagas) {
 
 }
