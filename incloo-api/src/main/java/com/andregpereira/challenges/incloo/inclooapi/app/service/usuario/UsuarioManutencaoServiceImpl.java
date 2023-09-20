@@ -3,7 +3,9 @@ package com.andregpereira.challenges.incloo.inclooapi.app.service.usuario;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioCreateDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioUpdateDto;
+import com.andregpereira.challenges.incloo.inclooapi.app.mapper.UsuarioCredentialServiceMapper;
 import com.andregpereira.challenges.incloo.inclooapi.app.mapper.UsuarioServiceMapper;
+import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.credential.UserCreateUc;
 import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.usuario.UsuarioActivateUc;
 import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.usuario.UsuarioCreateUc;
 import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.usuario.UsuarioDeactivateUc;
@@ -18,13 +20,16 @@ import org.springframework.stereotype.Service;
 public non-sealed class UsuarioManutencaoServiceImpl implements UsuarioManutencaoService {
 
     private final UsuarioCreateUc createUc;
+    private final UserCreateUc userCreateUc;
     private final UsuarioUpdateUc updateUc;
     private final UsuarioActivateUc activateUc;
     private final UsuarioDeactivateUc deactivateUc;
     private final UsuarioServiceMapper mapper;
+    private final UsuarioCredentialServiceMapper usuarioCredentialServiceMapper;
 
     @Override
     public UsuarioDto create(UsuarioCreateDto dto) {
+        userCreateUc.create(usuarioCredentialServiceMapper.toUsuarioCredential(dto));
         return mapper.toUsuarioDto(createUc.create(mapper.toUsuario(dto)));
     }
 
