@@ -1,0 +1,68 @@
+name: incloo
+
+services:
+  eureka-server:
+    platform: linux/amd64
+    container_name: incloo-eureka-server
+    build:
+      context: ./incloo-eureka-server
+      dockerfile: ./Dockerfile
+    healthcheck:
+      test: "curl --fail --silent localhost:8761/actuator/health | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    ports:
+      - "8721:8761"
+
+  api-gateway:
+    platform: linux/amd64
+    container_name: incloo-api-gateway
+    build:
+      context: ./incloo-api-gateway
+      dockerfile: ./Dockerfile
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    environment:
+      - EUREKA_SERVICE_NAME=eureka-server
+    ports:
+      - "8723:8763"
+
+  incloo-api:
+    platform: linux/amd64
+    container_name: incloo-api
+    build:
+      context: ./incloo-api
+      dockerfile: ./Dockerfile
+    depends_on:
+      incloo-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+    environment:
+      #      - SERVER_PORT=8010
+      - EUREKA_SERVICE_NAME=eureka-server
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://incloo-db/incloo
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+  #    ports:
+  #      - "8010:8010"
+
+  incloo-db:
+    image: postgres:alpine
+    container_name: incloo-api-db
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=incloo
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready", "-d", "incloo" ]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+    ports:
+      - "5412:5432"
