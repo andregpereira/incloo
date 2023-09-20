@@ -46,7 +46,7 @@ public class UsuarioDataProvider implements UsuarioGateway {
 
     @Override
     public Page<Usuario> findByNome(String nome, Pageable pageable) {
-        return repository.findByNome(nome, pageable).map(mapper::toUsuario);
+        return repository.findByName(nome, pageable).map(mapper::toUsuario);
     }
 
     @Override
@@ -56,19 +56,19 @@ public class UsuarioDataProvider implements UsuarioGateway {
 
     @Override
     public Usuario findByIdAndAtivoTrue(Long id, UnaryOperator<Usuario> op) {
-        return op.apply(repository.findByIdAndAtivoTrue(id).map(mapper::toUsuario).orElseThrow(
+        return op.apply(repository.findByIdAndActiveTrue(id).map(mapper::toUsuario).orElseThrow(
                 () -> new UsuarioNotFoundException(id, true)));
     }
 
     @Override
     public void findByIdAndAtivoTrue(Long id, Consumer<Usuario> op) {
-        op.accept(repository.findByIdAndAtivoTrue(id).map(mapper::toUsuario).orElseThrow(
+        op.accept(repository.findByIdAndActiveTrue(id).map(mapper::toUsuario).orElseThrow(
                 () -> new UsuarioNotFoundException(id, true)));
     }
 
     @Override
     public void findByIdAndAtivoFalse(Long id, Consumer<Usuario> op) {
-        op.accept(repository.findByIdAndAtivoFalse(id).map(mapper::toUsuario).orElseThrow(
+        op.accept(repository.findByIdAndActiveFalse(id).map(mapper::toUsuario).orElseThrow(
                 () -> new UsuarioNotFoundException(id, false)));
     }
 
@@ -80,7 +80,7 @@ public class UsuarioDataProvider implements UsuarioGateway {
 
     @Override
     public Usuario findByEmail(String email) {
-        return repository.findByEmailAndAtivoTrue(email).map(mapper::toUsuario).orElseThrow(
+        return repository.findByEmailAndActiveTrue(email).map(mapper::toUsuario).orElseThrow(
                 () -> new UsuarioNotFoundException("e-mail", email));
     }
 

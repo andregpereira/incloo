@@ -32,7 +32,7 @@ public class VagaDataProvider implements VagaGateway {
 
     @Override
     public boolean existsByTitulo(String titulo) {
-        return repository.existsByTitulo(titulo);
+        return repository.existsByTitle(titulo);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class VagaDataProvider implements VagaGateway {
 
     @Override
     public Page<Vaga> findByTitulo(String titulo, Pageable pageable) {
-        return repository.findByTitulo(titulo, pageable).map(mapper::toVaga);
+        return repository.findByTitle(titulo, pageable).map(mapper::toVaga);
     }
 
     @Override
@@ -57,19 +57,19 @@ public class VagaDataProvider implements VagaGateway {
 
     @Override
     public Vaga findByIdAndAtivoTrue(Long id, UnaryOperator<Vaga> op) {
-        return op.apply(repository.findByIdAndAtivoTrue(id).map(mapper::toVaga).orElseThrow(
+        return op.apply(repository.findByIdAndActiveTrue(id).map(mapper::toVaga).orElseThrow(
                 () -> new VagaNotFoundException(id, true)));
     }
 
     @Override
     public void findByIdAndAtivoTrue(Long id, Consumer<Vaga> op) {
-        op.accept(repository.findByIdAndAtivoTrue(id).map(mapper::toVaga).orElseThrow(
+        op.accept(repository.findByIdAndActiveTrue(id).map(mapper::toVaga).orElseThrow(
                 () -> new VagaNotFoundException(id, true)));
     }
 
     @Override
     public void findByIdAndAtivoFalse(Long id, Consumer<Vaga> op) {
-        op.accept(repository.findByIdAndAtivoFalse(id).map(mapper::toVaga).orElseThrow(
+        op.accept(repository.findByIdAndActiveFalse(id).map(mapper::toVaga).orElseThrow(
                 () -> new VagaNotFoundException(id, false)));
     }
 
