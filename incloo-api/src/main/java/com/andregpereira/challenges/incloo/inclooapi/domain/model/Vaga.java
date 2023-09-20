@@ -16,7 +16,7 @@ public class Vaga {
     private Long id;
     private String title;
     private String description;
-    private Set<String> minorityGroups;
+    private Set<String> minorityGroups = new LinkedHashSet<>();
     private LocalDate createdDate;
     private LocalDate lastModifiedDate;
     private boolean active;
