@@ -47,7 +47,7 @@ public class VagaDataProvider implements VagaGateway {
 
     @Override
     public Page<Vaga> findByPublicosAlvos(Set<String> publicosAlvos, Pageable pageable) {
-        return repository.findByPublicosAlvosIn(publicosAlvos, pageable).map(mapper::toVaga);
+        return repository.findByMinorityGroupsIn(publicosAlvos, pageable).map(mapper::toVaga);
     }
 
     @Override
