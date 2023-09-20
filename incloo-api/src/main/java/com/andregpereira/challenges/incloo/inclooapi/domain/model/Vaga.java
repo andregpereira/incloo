@@ -1,49 +1,24 @@
 package com.andregpereira.challenges.incloo.inclooapi.domain.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.StringJoiner;
 
-@Builder
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Vaga implements Serializable {
+public class Vaga {
 
-    private String titulo;
-    private String descricao;
+    private String title;
+    private String description;
     private Set<String> publicosAlvos;
-    private LocalDate dataCriacao;
-    private LocalDate dataModificacao;
-    private boolean ativo;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof Vaga vaga))
-            return false;
-        return ativo == vaga.ativo && Objects.equals(titulo, vaga.titulo) && Objects.equals(descricao,
-                vaga.descricao) && Objects.equals(publicosAlvos, vaga.publicosAlvos) && Objects.equals(dataCriacao,
-                vaga.dataCriacao) && Objects.equals(dataModificacao, vaga.dataModificacao);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(titulo, descricao, publicosAlvos, dataCriacao, dataModificacao, ativo);
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Vaga.class.getSimpleName() + "[", "]").add("titulo='" + titulo + "'").add(
-                "descricao='" + descricao + "'").add("publicosAlvos=" + publicosAlvos).add(
-                "dataCriacao=" + dataCriacao).add("dataModificacao=" + dataModificacao).add(
-                "ativo=" + ativo).toString();
-    }
+    private LocalDate createdDate;
+    private LocalDate lastModifiedDate;
+    private boolean active;
+    private Set<Usuario> users = new LinkedHashSet<>();
 
 }

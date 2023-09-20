@@ -2,22 +2,21 @@ package com.andregpereira.challenges.incloo.inclooapi.infra.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.StringJoiner;
 
-@Builder
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "usuario")
@@ -25,7 +24,7 @@ import java.util.StringJoiner;
 @Table(name = "tb_usuarios", uniqueConstraints = {@UniqueConstraint(name = "uk_cpf", columnNames = "cpf"),
         @UniqueConstraint(name = "uk_email", columnNames = "email")})
 @SequenceGenerator(name = "usuarios", sequenceName = "sq_usuarios", allocationSize = 1)
-public class UsuarioEntity implements Serializable {
+public class UsuarioEntity {
 
     @Id
     @Column(name = "id_usuario")
@@ -33,10 +32,10 @@ public class UsuarioEntity implements Serializable {
     private Long id;
 
     @Column(nullable = false)
-    private String nome;
+    private String name;
 
     @Column(nullable = false)
-    private String sobrenome;
+    private String lastName;
 
     @Column(nullable = false, length = 11)
     private String cpf;
@@ -45,61 +44,57 @@ public class UsuarioEntity implements Serializable {
     private String email;
 
     @Column(nullable = false)
-    private String celular;
+    private String mobileNumber;
 
-    @Column(nullable = false)
-    private LocalDate dataNascimento;
-
-    private Set<String> vulnerabilidadesSociais = new HashSet<>();
-    private Set<String> deficiencias = new HashSet<>();
+    private LocalDate birthDate;
 
     @Transient
-    private int idade;
+    private Integer age;
+
+    private String ethnicity;
+    private Boolean lgbtqia;
+    private String disability;
 
     @CreatedDate
     @Column(nullable = false)
-    private LocalDate dataCriacao;
+    private LocalDate createdDate;
 
     @LastModifiedDate
     @Column(nullable = false)
-    private LocalDate dataModificacao;
+    private LocalDate lastModifiedDate;
 
     @Column(nullable = false)
-    private boolean ativo;
+    private boolean active;
 
-    public int getIdade() {
-        return Period.between(dataNascimento, LocalDate.now()).getYears();
+    @ToString.Exclude
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinTable(name = "tb_usuarios_vagas", joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_vaga"))
+    private Set<VagaEntity> vagas = new LinkedHashSet<>();
+
+    public Integer getAge() {
+        return birthDate != null ? Period.between(birthDate, LocalDate.now()).getYears() : null;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o)
             return true;
         if (!(o instanceof UsuarioEntity usuario))
             return false;
-        return idade == usuario.idade && ativo == usuario.ativo && Objects.equals(id, usuario.id) && Objects.equals(
-                nome, usuario.nome) && Objects.equals(sobrenome, usuario.sobrenome) && Objects.equals(cpf,
-                usuario.cpf) && Objects.equals(email, usuario.email) && Objects.equals(celular,
-                usuario.celular) && Objects.equals(dataNascimento, usuario.dataNascimento) && Objects.equals(
-                vulnerabilidadesSociais, usuario.vulnerabilidadesSociais) && Objects.equals(deficiencias,
-                usuario.deficiencias) && Objects.equals(dataCriacao, usuario.dataCriacao) && Objects.equals(
-                dataModificacao, usuario.dataModificacao);
+        Class<?> oEffectiveClass = o instanceof HibernateProxy hibernateProxy
+                ? hibernateProxy.getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy hibernateProxy
+                ? hibernateProxy.getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass)
+            return false;
+        return getId() != null && Objects.equals(getId(), usuario.getId());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, nome, sobrenome, cpf, email, celular, dataNascimento, vulnerabilidadesSociais,
-                deficiencias, idade, dataCriacao, dataModificacao, ativo);
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", UsuarioEntity.class.getSimpleName() + "[", "]").add("id=" + id).add(
-                "nome='" + nome + "'").add("sobrenome='" + sobrenome + "'").add("cpf='" + cpf + "'").add(
-                "email='" + email + "'").add("celular='" + celular + "'").add("dataNascimento=" + dataNascimento).add(
-                "vulnerabilidadesSociais=" + vulnerabilidadesSociais).add("deficiencias=" + deficiencias).add(
-                "idade=" + idade).add("dataCriacao=" + dataCriacao).add("dataModificacao=" + dataModificacao).add(
-                "ativo=" + ativo).toString();
+    public final int hashCode() {
+        return this instanceof HibernateProxy hibernateProxy
+                ? hibernateProxy.getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 
 }
