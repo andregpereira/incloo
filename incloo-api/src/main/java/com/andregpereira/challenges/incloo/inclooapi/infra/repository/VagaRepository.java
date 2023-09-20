@@ -12,13 +12,13 @@ import java.util.Set;
 @Repository
 public interface VagaRepository extends BaseRepository<VagaEntity> {
 
-    boolean existsByTitulo(String titulo);
+    boolean existsByTitle(String titulo);
 
     @Query(value = """
             SELECT * FROM tb_vagas v
-            WHERE v.titulo ILIKE %:titulo%
+            WHERE v.title ILIKE %:title%
             """, nativeQuery = true)
-    Page<VagaEntity> findByTitulo(@Param("titulo") String titulo, Pageable pageable);
+    Page<VagaEntity> findByTitle(@Param("title") String title, Pageable pageable);
 
     Page<VagaEntity> findByPublicosAlvosIn(Set<String> publicosAlvos, Pageable pageable);
 

@@ -8,8 +8,8 @@ import java.util.Optional;
 @NoRepositoryBean
 public interface BaseRepository<T> extends JpaRepository<T, Long> {
 
-    Optional<T> findByIdAndAtivoTrue(Long id);
+    Optional<T> findByIdAndActiveTrue(Long id);
 
-    Optional<T> findByIdAndAtivoFalse(Long id);
+    Optional<T> findByIdAndActiveFalse(Long id);
 
 }

@@ -26,12 +26,12 @@ public interface UsuarioRepository extends BaseRepository<UsuarioEntity> {
             """, nativeQuery = true)
     Optional<UsuarioEntity> findByCpf(String cpf);
 
-    Optional<UsuarioEntity> findByEmailAndAtivoTrue(String email);
+    Optional<UsuarioEntity> findByEmailAndActiveTrue(String email);
 
     @Query(value = """
             SELECT * FROM tb_usuarios u
             WHERE u.nome ILIKE %:nome% AND u.ativo=true
             """, nativeQuery = true)
-    Page<UsuarioEntity> findByNome(@Param("nome") String nome, Pageable pageable);
+    Page<UsuarioEntity> findByName(@Param("nome") String nome, Pageable pageable);
 
 }
