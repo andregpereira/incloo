@@ -18,4 +18,5 @@ public class GatewayController {
         return Mono.just(ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(
                 "URL indisponível no momento. Tente novamente"));
     }
+
 }
