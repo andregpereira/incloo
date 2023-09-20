@@ -8,12 +8,12 @@ import java.util.Set;
 
 public interface VagaGateway extends BaseGateway<Vaga> {
 
-    boolean existsByTitulo(String titulo);
+    boolean existsByTitle(String title);
 
     Page<Vaga> findAll(Pageable pageable);
 
-    Page<Vaga> findByTitulo(String titulo, Pageable pageable);
+    Page<Vaga> findByTitle(String title, Pageable pageable);
 
-    Page<Vaga> findByPublicosAlvos(Set<String> publicosAlvos, Pageable pageable);
+    Page<Vaga> findByMinorityGroups(Set<String> minorityGroups, Pageable pageable);
 
 }

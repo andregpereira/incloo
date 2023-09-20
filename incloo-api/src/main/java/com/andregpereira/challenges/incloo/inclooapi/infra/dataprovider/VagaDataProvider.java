@@ -31,8 +31,8 @@ public class VagaDataProvider implements VagaGateway {
     }
 
     @Override
-    public boolean existsByTitulo(String titulo) {
-        return repository.existsByTitle(titulo);
+    public boolean existsByTitle(String title) {
+        return repository.existsByTitle(title);
     }
 
     @Override
@@ -41,13 +41,13 @@ public class VagaDataProvider implements VagaGateway {
     }
 
     @Override
-    public Page<Vaga> findByTitulo(String titulo, Pageable pageable) {
-        return repository.findByTitle(titulo, pageable).map(mapper::toVaga);
+    public Page<Vaga> findByTitle(String title, Pageable pageable) {
+        return repository.findByTitle(title, pageable).map(mapper::toVaga);
     }
 
     @Override
-    public Page<Vaga> findByPublicosAlvos(Set<String> publicosAlvos, Pageable pageable) {
-        return repository.findByMinorityGroupsIn(publicosAlvos, pageable).map(mapper::toVaga);
+    public Page<Vaga> findByMinorityGroups(Set<String> minorityGroups, Pageable pageable) {
+        return repository.findByMinorityGroupsIn(minorityGroups, pageable).map(mapper::toVaga);
     }
 
     @Override

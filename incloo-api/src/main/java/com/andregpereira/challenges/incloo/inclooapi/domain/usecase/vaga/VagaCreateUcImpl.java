@@ -16,7 +16,7 @@ public non-sealed class VagaCreateUcImpl implements VagaCreateUc {
 
     @Override
     public Vaga create(Vaga vaga) {
-        if (gateway.existsByTitulo(vaga.getTitle()))
+        if (gateway.existsByTitle(vaga.getTitle()))
             throw new VagaAlreadyExistsException();
         return gateway.save(vaga);
     }
