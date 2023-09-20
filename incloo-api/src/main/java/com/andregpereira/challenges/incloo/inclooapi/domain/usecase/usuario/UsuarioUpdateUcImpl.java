@@ -19,10 +19,10 @@ public non-sealed class UsuarioUpdateUcImpl implements UsuarioUpdateUc {
         return gateway.findByIdAndAtivoTrue(id, u -> {
             if (gateway.existsByEmail(usuarioAtualizado.getEmail()))
                 throw new UsuarioAlreadyExistsException("e-mail");
-            u.setNome(usuarioAtualizado.getNome());
-            u.setSobrenome(usuarioAtualizado.getSobrenome());
+            u.setName(usuarioAtualizado.getName());
+            u.setLastName(usuarioAtualizado.getLastName());
             u.setEmail(usuarioAtualizado.getEmail());
-            u.setCelular(usuarioAtualizado.getCelular());
+            u.setMobileNumber(usuarioAtualizado.getMobileNumber());
             return gateway.save(u);
         });
     }

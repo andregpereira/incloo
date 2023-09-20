@@ -15,7 +15,7 @@ public non-sealed class UsuarioDeactivateUcImpl implements UsuarioDeactivateUc {
     @Override
     public void deactivate(Long id) {
         gateway.findByIdAndAtivoTrue(id, u -> {
-            u.setAtivo(false);
+            u.setActive(false);
             gateway.save(u);
         });
     }

@@ -21,6 +21,7 @@ public non-sealed class UsuarioCreateUcImpl implements UsuarioCreateUc {
         else if (gateway.existsByEmail(usuario.getEmail()))
             throw new UsuarioAlreadyExistsException("e-mail");
         usuario.setCpf(usuario.getCpf().replaceAll("[.-]", ""));
+        usuario.setActive(true);
         return gateway.save(usuario);
     }
 
