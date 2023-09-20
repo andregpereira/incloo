@@ -10,7 +10,8 @@
     <artifactId>incloo-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Incloo API</name>
-    <description>Incloo API é uma API com operações CRUD da plataforma de recrutamento e seleção da Challenge da EY de
+    <description>Incloo API é uma API com operações CRUD da plataforma de recrutamento e seleção da Challenge da
+        Everymind de
         2023 do 4º ano do curso de Sistemas de Informação da FIAP.
     </description>
     <dependencies>
@@ -37,8 +38,24 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
