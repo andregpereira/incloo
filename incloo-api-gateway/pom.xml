@@ -11,8 +11,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>Incloo API Gateway</name>
     <description>Incloo API Gateway é um gateway de acesso à plataforma de recrutamento e seleção da Challenge da
-        Everymind de
-        2023 do 4º ano do curso de Sistemas de Informação da FIAP.
+        Everymind de 2023 do 4º ano do curso de Sistemas de Informação da FIAP.
     </description>
     <dependencies>
         <dependency>
@@ -44,6 +43,18 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
