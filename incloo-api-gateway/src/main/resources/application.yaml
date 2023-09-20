@@ -17,7 +17,7 @@ spring:
         - id: incloo-api
           uri: lb://incloo-api
           predicates:
-            - Path=/usuarios/**, /funcionarios/**
+            - Path=/**
           filters:
             - name: CircuitBreaker
               args:
@@ -28,12 +28,6 @@ server:
   port: ${SERVER_PORT:8763}
   error:
     include-stacktrace: NEVER
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
 
 eureka:
   instance:
@@ -46,6 +40,12 @@ eureka:
     serviceUrl:
     service-url:
       defaultZone: http://${EUREKA_SERVICE_NAME:localhost}:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 resilience4j:
   circuitbreaker:
@@ -63,7 +63,7 @@ resilience4j:
   timelimiter:
     configs:
       default:
-        timeoutDuration: 10s
+        timeoutDuration: 20s
     instances:
       fallback:
         baseConfig: default
