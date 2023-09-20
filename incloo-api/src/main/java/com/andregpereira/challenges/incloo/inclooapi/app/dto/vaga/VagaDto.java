@@ -9,7 +9,7 @@ import java.util.Set;
 public record VagaDto(Long id,
         String title,
         String description,
-        Set<String> publicosAlvos,
+        Set<String> minorityGroups,
         @JsonFormat(pattern = "dd/MM/uuuu") LocalDate createdDate,
         @JsonFormat(pattern = "dd/MM/uuuu") LocalDate lastModifiedDate,
         boolean active,

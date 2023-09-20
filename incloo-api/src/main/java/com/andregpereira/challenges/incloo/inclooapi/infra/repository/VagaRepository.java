@@ -20,6 +20,6 @@ public interface VagaRepository extends BaseRepository<VagaEntity> {
             """, nativeQuery = true)
     Page<VagaEntity> findByTitle(@Param("title") String title, Pageable pageable);
 
-    Page<VagaEntity> findByPublicosAlvosIn(Set<String> publicosAlvos, Pageable pageable);
+    Page<VagaEntity> findByMinorityGroupsIn(Set<String> minorityGroups, Pageable pageable);
 
 }

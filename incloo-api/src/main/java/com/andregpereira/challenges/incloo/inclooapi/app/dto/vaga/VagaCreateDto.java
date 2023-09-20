@@ -7,6 +7,6 @@ import java.util.Set;
 
 public record VagaCreateDto(@NotBlank(message = "O título é obrigatório") String title,
         @NotBlank(message = "A descrição é obrigatória") String description,
-        @NotEmpty(message = "O público-alvo é obrigatório") Set<String> publicosAlvos) {
+        @NotEmpty(message = "O público-alvo é obrigatório") Set<String> minorityGroups) {
 
 }

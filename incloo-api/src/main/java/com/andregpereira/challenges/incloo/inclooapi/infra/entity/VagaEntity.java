@@ -35,7 +35,7 @@ public class VagaEntity {
     private String description;
 
     @Column(nullable = false)
-    private Set<String> publicosAlvos;
+    private Set<String> minorityGroups;
 
     @CreatedDate
     @Column(nullable = false)

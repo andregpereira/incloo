@@ -13,9 +13,10 @@ import java.util.Set;
 @NoArgsConstructor
 public class Vaga {
 
+    private Long id;
     private String title;
     private String description;
-    private Set<String> publicosAlvos;
+    private Set<String> minorityGroups;
     private LocalDate createdDate;
     private LocalDate lastModifiedDate;
     private boolean active;
