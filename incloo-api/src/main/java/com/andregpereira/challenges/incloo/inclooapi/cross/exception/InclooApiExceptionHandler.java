@@ -2,19 +2,19 @@ package com.andregpereira.challenges.incloo.inclooapi.cross.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ProblemDetail;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.net.URI;
 import java.text.MessageFormat;
 
 @Slf4j
@@ -22,6 +22,17 @@ import java.text.MessageFormat;
 public class InclooApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final String LOG_TRATANDO_EXCECAO = "Tratando exceção [{}]";
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<Object> auth(AuthenticationException ex, WebRequest request) {
+        log.warn(LOG_TRATANDO_EXCECAO, ex.toString());
+        HttpStatusCode status = HttpStatus.BAD_REQUEST;
+        ProblemDetail body = createProblemDetail(ex, status,
+                "Opa. Houve um problema com a autenticação. Tente novamente", null, null, request);
+        body.setTitle("Erro de autenticação");
+        body.setType(URI.create("http://incloo.com/errors/bad_request"));
+        return super.handleExceptionInternal(ex, body, new HttpHeaders(), status, request);
+    }
 
     @Override
     protected ResponseEntity<Object> handleErrorResponseException(ErrorResponseException ex, HttpHeaders headers,
@@ -71,8 +82,8 @@ public class InclooApiExceptionHandler extends ResponseEntityExceptionHandler {
         return super.handleExceptionInternal(ex, body, headers, status, request);
     }
 
-    private record DadoInvalido(String campo,
-            String mensagem) {
+    private record DadoInvalido(String field,
+            String message) {
 
         public DadoInvalido(FieldError erro) {
             this(erro.getField(), erro.getDefaultMessage());
