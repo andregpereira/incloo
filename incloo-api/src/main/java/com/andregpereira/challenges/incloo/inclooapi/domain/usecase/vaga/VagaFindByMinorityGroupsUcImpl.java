@@ -13,7 +13,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Slf4j
 @Component
-public non-sealed class VagaFindByPublicoAlvoUcImpl implements VagaFindByPublicoAlvoUc {
+public non-sealed class VagaFindByMinorityGroupsUcImpl implements VagaFindByMinorityGroupsUc {
 
     private final VagaGateway gateway;
 

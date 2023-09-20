@@ -4,8 +4,8 @@ import com.andregpereira.challenges.incloo.inclooapi.domain.model.Vaga;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public sealed interface VagaFindByTituloUc permits VagaFindByTituloUcImpl {
+public sealed interface VagaFindByTitleUc permits VagaFindByTitleUcImpl {
 
-    Page<Vaga> findByTitulo(String titulo, Pageable pageable);
+    Page<Vaga> findByTitle(String title, Pageable pageable);
 
 }

@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 @Component
-public non-sealed class VagaFindByTituloUcImpl implements VagaFindByTituloUc {
+public non-sealed class VagaFindByTitleUcImpl implements VagaFindByTitleUc {
 
     private final VagaGateway gateway;
 
     @Override
-    public Page<Vaga> findByTitulo(String titulo, Pageable pageable) {
-        return gateway.findByTitulo(titulo, pageable);
+    public Page<Vaga> findByTitle(String title, Pageable pageable) {
+        return gateway.findByTitulo(title, pageable);
     }
 
 }

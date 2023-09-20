@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Set;
 
-public sealed interface VagaFindByPublicoAlvoUc permits VagaFindByPublicoAlvoUcImpl {
+public sealed interface VagaFindByMinorityGroupsUc permits VagaFindByMinorityGroupsUcImpl {
 
     Page<Vaga> findByPublicosAlvos(Set<String> publicosAlvos, Pageable pageable);
 
