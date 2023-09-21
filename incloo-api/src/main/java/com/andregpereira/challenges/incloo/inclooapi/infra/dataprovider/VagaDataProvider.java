@@ -47,7 +47,7 @@ public class VagaDataProvider implements VagaGateway {
 
     @Override
     public Page<Vaga> findByMinorityGroups(Set<String> minorityGroups, Pageable pageable) {
-        return repository.findByMinorityGroupsIn(minorityGroups, pageable).map(mapper::toVaga);
+        return repository.findByMinorityGroupsIn(minorityGroups, minorityGroups.size(), pageable).map(mapper::toVaga);
     }
 
     @Override
