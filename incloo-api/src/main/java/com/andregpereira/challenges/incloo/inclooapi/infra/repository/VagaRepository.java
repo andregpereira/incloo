@@ -27,7 +27,7 @@ public interface VagaRepository extends BaseRepository<VagaEntity> {
             (:minorityGroups) GROUP BY va.id_vaga
             HAVING COUNT(va.id_vaga) = :countMinorityGroups)
             """, nativeQuery = true)
-    Page<VagaEntity> findByMinorityGroupsContainsIn(@Param("minorityGroups") Collection<String> minorityGroups,
+    Page<VagaEntity> findByMinorityGroupsIn(@Param("minorityGroups") Collection<String> minorityGroups,
             @Param("countMinorityGroups") long countMinorityGroups, Pageable pageable);
 
 }
