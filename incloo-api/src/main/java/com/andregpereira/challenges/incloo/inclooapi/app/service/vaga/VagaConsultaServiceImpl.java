@@ -42,7 +42,7 @@ public non-sealed class VagaConsultaServiceImpl implements VagaConsultaService {
 
     @Override
     public Page<VagaDto> findByMinorityGroups(Set<String> minorityGroups, Pageable pageable) {
-        return findByMinorityGroupsUc.findByPublicosAlvos(minorityGroups, pageable).map(mapper::toVagaDto);
+        return findByMinorityGroupsUc.findByMinorityGroups(minorityGroups, pageable).map(mapper::toVagaDto);
     }
 
 }

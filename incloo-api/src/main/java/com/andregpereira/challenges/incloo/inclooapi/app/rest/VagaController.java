@@ -76,7 +76,7 @@ public class VagaController {
 
     @GetMapping("/publicos-alvos")
     public ResponseEntity<Page<VagaDto>> findByMinorityGroups(@RequestParam("publicos") Set<String> minorityGroups,
-            @PageableDefault(sort = "minorityGroups") Pageable pageable) {
+            @PageableDefault(sort = "id_vaga") Pageable pageable) {
         return ResponseEntity.ok(consultaService.findByMinorityGroups(minorityGroups, pageable));
     }
 

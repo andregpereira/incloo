@@ -8,6 +8,6 @@ import java.util.Set;
 
 public sealed interface VagaFindByMinorityGroupsUc permits VagaFindByMinorityGroupsUcImpl {
 
-    Page<Vaga> findByPublicosAlvos(Set<String> publicosAlvos, Pageable pageable);
+    Page<Vaga> findByMinorityGroups(Set<String> minorityGroups, Pageable pageable);
 
 }

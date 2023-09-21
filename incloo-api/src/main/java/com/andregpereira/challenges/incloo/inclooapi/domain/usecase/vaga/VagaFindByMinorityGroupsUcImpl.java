@@ -18,8 +18,8 @@ public non-sealed class VagaFindByMinorityGroupsUcImpl implements VagaFindByMino
     private final VagaGateway gateway;
 
     @Override
-    public Page<Vaga> findByPublicosAlvos(Set<String> publicosAlvos, Pageable pageable) {
-        return gateway.findByMinorityGroups(publicosAlvos, pageable);
+    public Page<Vaga> findByMinorityGroups(Set<String> minorityGroups, Pageable pageable) {
+        return gateway.findByMinorityGroups(minorityGroups, pageable);
     }
 
 }
