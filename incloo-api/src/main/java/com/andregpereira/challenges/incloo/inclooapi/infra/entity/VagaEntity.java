@@ -34,6 +34,7 @@ public class VagaEntity {
     @Column(nullable = false)
     private String description;
 
+    @ElementCollection
     @Column(nullable = false)
     private Set<String> minorityGroups = new LinkedHashSet<>();
 
