@@ -10,9 +10,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -67,10 +67,8 @@ public class UsuarioEntity {
     private boolean active;
 
     @ToString.Exclude
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinTable(name = "tb_usuarios_vagas", joinColumns = @JoinColumn(name = "id_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "id_vaga"))
-    private Set<VagaEntity> vagas = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "user")
+    private List<CandidaturaEntity> jobApplications = new ArrayList<>();
 
     public Integer getAge() {
         return birthDate != null ? Period.between(birthDate, LocalDate.now()).getYears() : null;

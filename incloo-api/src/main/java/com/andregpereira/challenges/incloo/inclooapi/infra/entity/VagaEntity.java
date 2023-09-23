@@ -8,9 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -38,6 +36,9 @@ public class VagaEntity {
     @Column(nullable = false)
     private Set<String> minorityGroups = new LinkedHashSet<>();
 
+    @Lob
+    private byte[] technicalTest;
+
     @CreatedDate
     @Column(nullable = false)
     private LocalDate createdDate;
@@ -50,9 +51,8 @@ public class VagaEntity {
     private boolean active;
 
     @ToString.Exclude
-    @ManyToMany(mappedBy = "vagas",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    private Set<UsuarioEntity> users = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "job")
+    private List<CandidaturaEntity> jobApplications = new ArrayList<>();
 
     @Override
     public final boolean equals(Object o) {
