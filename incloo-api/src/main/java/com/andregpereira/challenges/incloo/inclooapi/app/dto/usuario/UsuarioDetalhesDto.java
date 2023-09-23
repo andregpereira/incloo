@@ -1,12 +1,14 @@
 package com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario;
 
+import com.andregpereira.challenges.incloo.inclooapi.app.dto.candidatura.CandidaturaDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
-public record UsuarioDto(Long id,
+public record UsuarioDetalhesDto(Long id,
         String name,
         String lastName,
         String cpf,
@@ -19,6 +21,7 @@ public record UsuarioDto(Long id,
         String disability,
         @JsonFormat(pattern = "dd/MM/uuuu") LocalDate createdDate,
         @JsonFormat(pattern = "dd/MM/uuuu") LocalDate lastModifiedDate,
-        boolean active) {
+        boolean active,
+        List<CandidaturaDto> jobApplications) {
 
 }
