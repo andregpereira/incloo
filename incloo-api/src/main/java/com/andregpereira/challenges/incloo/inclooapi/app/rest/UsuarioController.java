@@ -1,6 +1,7 @@
 package com.andregpereira.challenges.incloo.inclooapi.app.rest;
 
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioCreateDto;
+import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioDetalhesDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioUpdateDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.service.usuario.UsuarioConsultaService;
@@ -64,7 +65,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDto> findById(@PathVariable Long id) {
+    public ResponseEntity<UsuarioDetalhesDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(consultaService.findById(id));
     }
 
