@@ -1,6 +1,7 @@
 package com.andregpereira.challenges.incloo.inclooapi.app.mapper;
 
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.vaga.VagaCreateDto;
+import com.andregpereira.challenges.incloo.inclooapi.app.dto.vaga.VagaDetalhesDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.vaga.VagaDto;
 import com.andregpereira.challenges.incloo.inclooapi.domain.model.Vaga;
 import org.mapstruct.Mapper;
@@ -15,5 +16,7 @@ public interface VagaServiceMapper {
     Vaga toVaga(VagaCreateDto dto);
 
     VagaDto toVagaDto(Vaga v);
+
+    VagaDetalhesDto toVagaDetalhesDto(Vaga v);
 
 }

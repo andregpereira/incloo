@@ -1,6 +1,7 @@
 package com.andregpereira.challenges.incloo.inclooapi.app.mapper;
 
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioCreateDto;
+import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioDetalhesDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioUpdateDto;
 import com.andregpereira.challenges.incloo.inclooapi.domain.model.Usuario;
@@ -18,5 +19,7 @@ public interface UsuarioServiceMapper {
     Usuario toUsuario(UsuarioUpdateDto dto);
 
     UsuarioDto toUsuarioDto(Usuario u);
+
+    UsuarioDetalhesDto toUsuarioDetalhesDto(Usuario u);
 
 }
