@@ -1,6 +1,7 @@
 package com.andregpereira.challenges.incloo.inclooapi.app.rest;
 
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.vaga.VagaCreateDto;
+import com.andregpereira.challenges.incloo.inclooapi.app.dto.vaga.VagaDetalhesDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.vaga.VagaDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.service.vaga.VagaConsultaService;
 import com.andregpereira.challenges.incloo.inclooapi.app.service.vaga.VagaManutencaoService;
@@ -64,7 +65,7 @@ public class VagaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<VagaDto> findById(@PathVariable Long id) {
+    public ResponseEntity<VagaDetalhesDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(consultaService.findById(id));
     }
 
