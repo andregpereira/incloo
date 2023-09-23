@@ -17,6 +17,9 @@ spring:
       ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
   mvc:
     log-resolved-exception: false
+  servlet:
+    multipart:
+      max-file-size: 2MB
 
 eureka:
   instance:
