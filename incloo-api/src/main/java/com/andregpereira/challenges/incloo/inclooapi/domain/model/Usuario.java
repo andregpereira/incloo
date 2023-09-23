@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -27,6 +27,6 @@ public class Usuario {
     private LocalDate createdDate;
     private LocalDate lastModifiedDate;
     private boolean active;
-    private Set<Vaga> vagas = new LinkedHashSet<>();
+    private List<Candidatura> jobApplications = new ArrayList<>();
 
 }
