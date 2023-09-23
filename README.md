@@ -30,7 +30,7 @@ Siga o passo a passo a seguir para buildar os módulos, criar suas respectivas i
 **Obs.:** Use `nerdctl`/`docker` se estiver usando Rancher Desktop com containerd/dockerd, `podman` se estiver usando
 Podman Desktop, ou `docker` se estiver usando Docker Desktop.
 
-1. Buildar projeto: `./mvnw clean package -Dmaven.test.skip -f pom.xml`  
+1. Buildar projeto: `./mvnw clean package -DskipTests -f pom.xml`  
    <br>
 2. Criar todas as imagens dos módulos: `nerdctl compose -f ./docker-compose.yaml build`  
    <br>
