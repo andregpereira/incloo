@@ -1,5 +1,6 @@
 package com.andregpereira.challenges.incloo.inclooapi.app.service.vaga;
 
+import com.andregpereira.challenges.incloo.inclooapi.app.dto.vaga.VagaDetalhesDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.vaga.VagaDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.mapper.VagaServiceMapper;
 import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.vaga.VagaFindAllUc;
@@ -31,8 +32,8 @@ public non-sealed class VagaConsultaServiceImpl implements VagaConsultaService {
     }
 
     @Override
-    public VagaDto findById(Long id) {
-        return mapper.toVagaDto(findByIdUc.findById(id));
+    public VagaDetalhesDto findById(Long id) {
+        return mapper.toVagaDetalhesDto(findByIdUc.findById(id));
     }
 
     @Override

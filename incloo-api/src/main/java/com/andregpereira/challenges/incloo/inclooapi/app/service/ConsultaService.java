@@ -7,6 +7,4 @@ public interface ConsultaService<R> {
 
     Page<R> findAll(Pageable pageable);
 
-    R findById(Long id);
-
 }

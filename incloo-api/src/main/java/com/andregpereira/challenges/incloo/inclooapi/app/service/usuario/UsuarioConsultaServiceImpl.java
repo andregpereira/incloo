@@ -1,5 +1,6 @@
 package com.andregpereira.challenges.incloo.inclooapi.app.service.usuario;
 
+import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioDetalhesDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.usuario.UsuarioDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.mapper.UsuarioServiceMapper;
 import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.usuario.*;
@@ -32,8 +33,8 @@ public non-sealed class UsuarioConsultaServiceImpl implements UsuarioConsultaSer
     }
 
     @Override
-    public UsuarioDto findById(Long id) {
-        return mapper.toUsuarioDto(findByIdUc.findById(id));
+    public UsuarioDetalhesDto findById(Long id) {
+        return mapper.toUsuarioDetalhesDto(findByIdUc.findById(id));
     }
 
     @Override
