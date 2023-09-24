@@ -20,7 +20,6 @@ public non-sealed class UsuarioUpdateUcImpl implements UsuarioUpdateUc {
             if (gateway.existsByEmail(usuarioAtualizado.getEmail()))
                 throw new UsuarioAlreadyExistsException("e-mail");
             u.setName(usuarioAtualizado.getName());
-            u.setLastName(usuarioAtualizado.getLastName());
             u.setEmail(usuarioAtualizado.getEmail());
             u.setMobileNumber(usuarioAtualizado.getMobileNumber());
             return gateway.save(u);
