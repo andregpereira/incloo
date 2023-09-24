@@ -30,7 +30,7 @@ services:
     ports:
       - "8723:8763"
 
-  incloo-api:
+  api:
     platform: linux/amd64
     container_name: incloo-api
     build:
