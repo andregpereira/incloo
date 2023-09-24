@@ -9,7 +9,6 @@ import org.hibernate.validator.constraints.br.CPF;
 import java.time.LocalDate;
 
 public record UsuarioCreateDto(@NotBlank(message = "O nome é obrigatório") String name,
-        @NotBlank(message = "O sobrenome é obrigatório") String lastName,
         @NotBlank(message = "O CPF é obrigatório") @CPF(
                 message = "Insira um CPF válido. Formatos aceitos: xxx.xxx.xxx-xx, xxxxxxxxx-xx e xxxxxxxxxxx") String cpf,
         @NotBlank(message = "O e-mail é obrigatório") @Email(message = "Insira um e-mail válido") String email,

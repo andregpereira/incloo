@@ -10,7 +10,6 @@ import java.util.List;
 @Builder
 public record UsuarioDetalhesDto(Long id,
         String name,
-        String lastName,
         String cpf,
         String email,
         String mobileNumber,
