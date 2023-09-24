@@ -31,7 +31,7 @@ public class CandidaturaController {
             @RequestPart MultipartFile technicalTest) {
         log.info("Criando candidatura...");
         CandidaturaDto candidatura = service.create(dto, cv, technicalTest);
-        log.info("Candidatura criado com sucesso");
+        log.info("Candidatura criada com sucesso");
         URI uri = UriComponentsBuilder.fromPath("/candidaturas/{id}").buildAndExpand(candidatura.id()).toUri();
         return ResponseEntity.created(uri).body(candidatura);
     }
