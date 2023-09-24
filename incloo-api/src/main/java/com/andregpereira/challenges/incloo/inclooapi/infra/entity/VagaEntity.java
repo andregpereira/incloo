@@ -51,7 +51,7 @@ public class VagaEntity {
     private boolean active;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "job")
+    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY)
     private List<CandidaturaEntity> jobApplications = new ArrayList<>();
 
     @Override

@@ -67,7 +67,7 @@ public class UsuarioEntity {
     private boolean active;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<CandidaturaEntity> jobApplications = new ArrayList<>();
 
     public Integer getAge() {
