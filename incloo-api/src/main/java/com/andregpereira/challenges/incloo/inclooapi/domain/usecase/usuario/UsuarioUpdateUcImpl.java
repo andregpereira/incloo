@@ -22,6 +22,11 @@ public non-sealed class UsuarioUpdateUcImpl implements UsuarioUpdateUc {
             u.setName(usuarioAtualizado.getName());
             u.setEmail(usuarioAtualizado.getEmail());
             u.setMobileNumber(usuarioAtualizado.getMobileNumber());
+            u.setBirthDate(usuarioAtualizado.getBirthDate());
+            u.setEthnicity(usuarioAtualizado.getEthnicity());
+            u.setLgbtqia(usuarioAtualizado.getLgbtqia());
+            u.setDisability(usuarioAtualizado.getDisability());
+            u.setFamilyIncome(usuarioAtualizado.getFamilyIncome());
             return gateway.save(u);
         });
     }
