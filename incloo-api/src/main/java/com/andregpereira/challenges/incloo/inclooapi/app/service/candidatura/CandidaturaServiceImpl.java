@@ -16,6 +16,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
@@ -45,13 +46,20 @@ public class CandidaturaServiceImpl implements CandidaturaService {
     }
 
     @Override
+    @SneakyThrows
+    @Transactional
     public ByteArrayResource downloadCv(Long id) {
-        return new ByteArrayResource(candidaturaFindByIdUc.findById(id).getCv());
+        Candidatura candidatura = candidaturaFindByIdUc.findById(id);
+        return new ByteArrayResource(candidatura.getCv().getBytes(1L, Math.toIntExact(candidatura.getCv().length())));
     }
 
     @Override
+    @SneakyThrows
+    @Transactional
     public ByteArrayResource downloadSubmittedTechnicalTest(Long id) {
-        return new ByteArrayResource(candidaturaFindByIdUc.findById(id).getSubmittedTechnicalTest());
+        Candidatura candidatura = candidaturaFindByIdUc.findById(id);
+        return new ByteArrayResource(candidatura.getSubmittedTechnicalTest().getBytes(1L,
+                Math.toIntExact(candidatura.getSubmittedTechnicalTest().length())));
     }
 
     @Override
