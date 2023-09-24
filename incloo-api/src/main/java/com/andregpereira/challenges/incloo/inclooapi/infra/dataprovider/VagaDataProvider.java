@@ -36,21 +36,6 @@ public class VagaDataProvider implements VagaGateway {
     }
 
     @Override
-    public Page<Vaga> findAll(Pageable pageable) {
-        return repository.findAll(pageable).map(mapper::toVaga);
-    }
-
-    @Override
-    public Page<Vaga> findByTitle(String title, Pageable pageable) {
-        return repository.findByTitle(title, pageable).map(mapper::toVaga);
-    }
-
-    @Override
-    public Page<Vaga> findByMinorityGroups(Set<String> minorityGroups, Pageable pageable) {
-        return repository.findByMinorityGroupsIn(minorityGroups, minorityGroups.size(), pageable).map(mapper::toVaga);
-    }
-
-    @Override
     public Vaga findById(Long id) {
         return repository.findById(id).map(mapper::toVaga).orElseThrow(() -> new VagaNotFoundException(id));
     }
@@ -71,6 +56,21 @@ public class VagaDataProvider implements VagaGateway {
     public void findByIdAndAtivoFalse(Long id, Consumer<Vaga> op) {
         op.accept(repository.findByIdAndActiveFalse(id).map(mapper::toVaga).orElseThrow(
                 () -> new VagaNotFoundException(id, false)));
+    }
+
+    @Override
+    public Page<Vaga> findAll(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toVaga);
+    }
+
+    @Override
+    public Page<Vaga> findByTitle(String title, Pageable pageable) {
+        return repository.findByTitle(title, pageable).map(mapper::toVaga);
+    }
+
+    @Override
+    public Page<Vaga> findByMinorityGroups(Set<String> minorityGroups, Pageable pageable) {
+        return repository.findByMinorityGroupsIn(minorityGroups, minorityGroups.size(), pageable).map(mapper::toVaga);
     }
 
 }

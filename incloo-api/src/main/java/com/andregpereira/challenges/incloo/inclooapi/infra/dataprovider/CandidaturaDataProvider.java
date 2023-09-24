@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -20,6 +21,7 @@ public class CandidaturaDataProvider implements CandidaturaGateway {
     private final CandidaturaDataProviderMapper mapper;
 
     @Override
+    @Transactional
     public Candidatura save(Candidatura candidatura) {
         return mapper.toCandidatura(repository.save(mapper.toCandidaturaEntity(candidatura)));
     }
