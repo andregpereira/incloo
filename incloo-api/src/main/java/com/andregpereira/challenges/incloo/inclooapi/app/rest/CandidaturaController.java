@@ -5,6 +5,8 @@ import com.andregpereira.challenges.incloo.inclooapi.app.dto.candidatura.Candida
 import com.andregpereira.challenges.incloo.inclooapi.app.service.candidatura.CandidaturaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ContentDisposition;
@@ -27,7 +29,7 @@ public class CandidaturaController {
     private final CandidaturaService service;
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestPart CandidaturaCreateDto dto, @RequestPart MultipartFile cv,
+    public ResponseEntity<CandidaturaDto> create(@RequestPart CandidaturaCreateDto dto, @RequestPart MultipartFile cv,
             @RequestPart MultipartFile technicalTest) {
         log.info("Criando candidatura...");
         CandidaturaDto candidatura = service.create(dto, cv, technicalTest);
@@ -37,26 +39,26 @@ public class CandidaturaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> findById(@PathVariable Long id) {
+    public ResponseEntity<CandidaturaDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/baixar-cv/{id}")
-    public ResponseEntity<Object> downloadCv(@PathVariable Long id) {
+    public ResponseEntity<ByteArrayResource> downloadCv(@PathVariable Long id) {
         return ResponseEntity.ok().headers(h -> h.setContentDisposition(ContentDisposition.attachment().filename(
                 String.format("Candidatura_%1s-CV.pdf", id)).build())).contentType(MediaType.APPLICATION_PDF).body(
                 service.downloadCv(id));
     }
 
     @GetMapping("/baixar-teste-tecnico/{id}")
-    public ResponseEntity<Object> downloadSubmittedTechnicalTest(@PathVariable Long id) {
+    public ResponseEntity<ByteArrayResource> downloadSubmittedTechnicalTest(@PathVariable Long id) {
         return ResponseEntity.ok().headers(h -> h.setContentDisposition(ContentDisposition.attachment().filename(
                 String.format("Candidatura_%1s-Teste_Tecnico.pdf", id)).build())).contentType(
                 MediaType.APPLICATION_PDF).body(service.downloadSubmittedTechnicalTest(id));
     }
 
     @GetMapping
-    public ResponseEntity<Object> findAll(@PageableDefault(sort = "id") Pageable pageable) {
+    public ResponseEntity<Page<CandidaturaDto>> findAll(@PageableDefault(sort = "id") Pageable pageable) {
         return ResponseEntity.ok(service.findAll(pageable));
     }
 
