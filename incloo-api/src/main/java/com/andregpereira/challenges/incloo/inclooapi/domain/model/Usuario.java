@@ -23,6 +23,7 @@ public class Usuario {
     private String ethnicity;
     private Boolean lgbtqia;
     private String disability;
+    private String familyIncome;
     private LocalDate createdDate;
     private LocalDate lastModifiedDate;
     private boolean active;

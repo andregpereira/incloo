@@ -16,6 +16,7 @@ public record UsuarioDto(Long id,
         String ethnicity,
         Boolean lgbtqia,
         String disability,
+        String familyIncome,
         @JsonFormat(pattern = "dd/MM/uuuu") LocalDate createdDate,
         @JsonFormat(pattern = "dd/MM/uuuu") LocalDate lastModifiedDate,
         boolean active) {

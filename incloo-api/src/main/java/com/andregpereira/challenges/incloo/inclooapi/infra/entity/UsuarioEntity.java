@@ -51,6 +51,7 @@ public class UsuarioEntity {
     private String ethnicity;
     private Boolean lgbtqia;
     private String disability;
+    private String familyIncome;
 
     @CreatedDate
     @Column(nullable = false)

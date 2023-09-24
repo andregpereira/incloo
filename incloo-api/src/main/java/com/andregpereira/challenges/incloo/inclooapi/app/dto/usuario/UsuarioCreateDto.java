@@ -19,6 +19,7 @@ public record UsuarioCreateDto(@NotBlank(message = "O nome é obrigatório") Str
         @Past(message = "Insira uma data de nascimento válida") LocalDate birthDate,
         String ethnicity,
         Boolean lgbtqia,
-        String disability) {
+        String disability,
+        String familyIncome) {
 
 }
