@@ -29,7 +29,7 @@ public class VagaEntity {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 3000)
     private String description;
 
     @ElementCollection
