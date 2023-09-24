@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -31,10 +32,10 @@ public class CandidaturaEntity {
     private String status;
 
     @Lob
-    private byte[] cv;
+    private Blob cv;
 
     @Lob
-    private byte[] submittedTechnicalTest;
+    private Blob submittedTechnicalTest;
 
     @CreatedDate
     @Column(nullable = false)

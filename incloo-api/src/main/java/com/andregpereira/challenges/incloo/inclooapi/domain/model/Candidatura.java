@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Blob;
 import java.time.LocalDate;
 
 @Data
@@ -15,8 +16,8 @@ public class Candidatura {
     private String linkedin;
     private String salaryExpectation;
     private String status;
-    private byte[] cv;
-    private byte[] submittedTechnicalTest;
+    private Blob cv;
+    private Blob submittedTechnicalTest;
     private LocalDate createdDate;
     private LocalDate lastModifiedDate;
     private Usuario user;
