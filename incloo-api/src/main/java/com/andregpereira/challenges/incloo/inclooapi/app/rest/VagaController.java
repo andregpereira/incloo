@@ -8,7 +8,6 @@ import com.andregpereira.challenges.incloo.inclooapi.app.service.vaga.VagaManute
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -59,26 +59,26 @@ public class VagaController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
-    public ResponseEntity<Page<VagaDto>> findAll(@PageableDefault(sort = "id") Pageable pageable) {
-        return ResponseEntity.ok(consultaService.findAll(pageable));
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<VagaDetalhesDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(consultaService.findById(id));
     }
 
+    @GetMapping
+    public ResponseEntity<List<VagaDto>> findAll(@PageableDefault(sort = "id") Pageable pageable) {
+        return ResponseEntity.ok(consultaService.findAll(pageable).stream().toList());
+    }
+
     @GetMapping("/titulo")
-    public ResponseEntity<Page<VagaDto>> findByTitle(@RequestParam String title,
+    public ResponseEntity<List<VagaDto>> findByTitle(@RequestParam String title,
             @PageableDefault(sort = "title") Pageable pageable) {
-        return ResponseEntity.ok(consultaService.findByTitle(title, pageable));
+        return ResponseEntity.ok(consultaService.findByTitle(title, pageable).stream().toList());
     }
 
     @GetMapping("/publicos-alvos")
-    public ResponseEntity<Page<VagaDto>> findByMinorityGroups(@RequestParam("publicos") Set<String> minorityGroups,
+    public ResponseEntity<List<VagaDto>> findByMinorityGroups(@RequestParam("publicos") Set<String> minorityGroups,
             @PageableDefault(sort = "id_vaga") Pageable pageable) {
-        return ResponseEntity.ok(consultaService.findByMinorityGroups(minorityGroups, pageable));
+        return ResponseEntity.ok(consultaService.findByMinorityGroups(minorityGroups, pageable).stream().toList());
     }
 
 }
