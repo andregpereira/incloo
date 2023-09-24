@@ -16,9 +16,11 @@ import java.io.IOException;
         nullValueIterableMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)
 public interface CandidaturaServiceMapper {
 
-    @Mapping(target = "cv", expression = "java(cv.getBytes())")
-    @Mapping(target = "submittedTechnicalTest", expression = "java(technicalTest.getBytes())")
-    Candidatura toCandidatura(CandidaturaCreateDto dto, MultipartFile cv, MultipartFile technicalTest) throws IOException;
+    @Mapping(target = "cv", expression = "java(org.hibernate.engine.jdbc.BlobProxy.generateProxy(cv.getBytes()))")
+    @Mapping(target = "submittedTechnicalTest",
+            expression = "java(org.hibernate.engine.jdbc.BlobProxy.generateProxy(technicalTest.getBytes()))")
+    Candidatura toCandidatura(CandidaturaCreateDto dto, MultipartFile cv,
+            MultipartFile technicalTest) throws IOException;
 
     CandidaturaDto toCandidaturaDto(Candidatura v);
 
