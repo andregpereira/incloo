@@ -27,9 +27,6 @@ Para este projeto, você precisará dos seguintes itens instalados na sua máqui
 
 Siga o passo a passo a seguir para buildar os módulos, criar suas respectivas imagens e rodar o projeto:
 
-**Obs.:** Use `nerdctl`/`docker` se estiver usando Rancher Desktop com containerd/dockerd, `podman` se estiver usando
-Podman Desktop, ou `docker` se estiver usando Docker Desktop.
-
 1. Buildar projeto:
 
 ```shell
@@ -47,6 +44,9 @@ nerdctl compose -f ./docker-compose.yaml build
 ```shell
 nerdctl compose -f ./docker-compose.yaml up -d
 ```
+
+> **_NOTA_:** Use `nerdctl`/`docker` se estiver usando containerd/dockerd do Rancher Desktop ou `podman` se estiver usando
+> Podman Desktop.
 
 ###### Flags
 
