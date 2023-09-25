@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -18,6 +19,7 @@ public class Vaga {
     private Long id;
     private String title;
     private String description;
+    private Blob technicalTest;
     private Set<String> minorityGroups = new LinkedHashSet<>();
     private LocalDate createdDate;
     private LocalDate lastModifiedDate;

@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -32,12 +33,12 @@ public class VagaEntity {
     @Column(nullable = false, length = 3000)
     private String description;
 
+    @Lob
+    private Blob technicalTest;
+
     @ElementCollection
     @Column(nullable = false)
     private Set<String> minorityGroups = new LinkedHashSet<>();
-
-    @Lob
-    private byte[] technicalTest;
 
     @CreatedDate
     @Column(nullable = false)
