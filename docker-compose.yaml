@@ -47,7 +47,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://incloo-db/incloo
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
   #    ports:
   #      - "8010:8010"
 
