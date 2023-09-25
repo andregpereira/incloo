@@ -8,8 +8,10 @@ import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.vaga.VagaCre
 import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.vaga.VagaDeactivateUc;
 import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.vaga.VagaUpdateUc;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -23,8 +25,9 @@ public non-sealed class VagaManutencaoServiceImpl implements VagaManutencaoServi
     private final VagaServiceMapper mapper;
 
     @Override
-    public VagaDto create(VagaCreateDto dto) {
-        return mapper.toVagaDto(createUc.create(mapper.toVaga(dto)));
+    @SneakyThrows
+    public VagaDto create(VagaCreateDto dto, MultipartFile technicalTest) {
+        return mapper.toVagaDto(createUc.create(mapper.toVaga(dto, technicalTest)));
     }
 
     @Override

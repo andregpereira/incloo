@@ -8,11 +8,15 @@ import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.vaga.VagaFin
 import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.vaga.VagaFindByMinorityGroupsUc;
 import com.andregpereira.challenges.incloo.inclooapi.domain.usecase.vaga.VagaFindByTitleUc;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Blob;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -25,6 +29,14 @@ public non-sealed class VagaConsultaServiceImpl implements VagaConsultaService {
     private final VagaFindByTitleUc findByTitleUc;
     private final VagaFindByMinorityGroupsUc findByMinorityGroupsUc;
     private final VagaServiceMapper mapper;
+
+    @Override
+    @SneakyThrows
+    @Transactional
+    public ByteArrayResource downloadTechnicalTest(Long id) {
+        Blob technicalTest = findByIdUc.findById(id).getTechnicalTest();
+        return new ByteArrayResource(technicalTest.getBytes(1L, Math.toIntExact(technicalTest.length())));
+    }
 
     @Override
     public Page<VagaDto> findAll(Pageable pageable) {

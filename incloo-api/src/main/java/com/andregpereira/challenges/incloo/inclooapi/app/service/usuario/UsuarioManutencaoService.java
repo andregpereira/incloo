@@ -7,4 +7,6 @@ import com.andregpereira.challenges.incloo.inclooapi.app.service.ManutencaoServi
 
 public sealed interface UsuarioManutencaoService extends ManutencaoService<UsuarioCreateDto, UsuarioUpdateDto, UsuarioDto> permits UsuarioManutencaoServiceImpl {
 
+    UsuarioDto create(UsuarioCreateDto dto);
+
 }
