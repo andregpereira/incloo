@@ -1,7 +1,6 @@
 package com.andregpereira.challenges.incloo.inclooapi.app.rest;
 
 import com.andregpereira.challenges.incloo.inclooapi.app.dto.credential.LoginDto;
-import com.andregpereira.challenges.incloo.inclooapi.app.dto.credential.TokenDto;
 import com.andregpereira.challenges.incloo.inclooapi.app.service.credential.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +16,9 @@ public class AuthController {
     private final AuthService service;
 
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> login(@RequestBody LoginDto dto) {
+    public ResponseEntity<String> login(@RequestBody LoginDto dto) {
         log.info("Fazendo login...");
-        return ResponseEntity.ok(new TokenDto(service.login(dto)));
+        return ResponseEntity.ok(service.login(dto));
     }
 
     @GetMapping("/validar")
