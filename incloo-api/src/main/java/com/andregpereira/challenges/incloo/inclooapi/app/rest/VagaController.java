@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -64,7 +66,9 @@ public class VagaController {
 
     @GetMapping("baixar-teste/{id}")
     public ResponseEntity<ByteArrayResource> downloadTechnicalTest(@PathVariable Long id) {
-        return ResponseEntity.ok(consultaService.downloadTechnicalTest(id));
+        return ResponseEntity.ok().headers(h -> h.setContentDisposition(ContentDisposition.attachment().filename(
+                String.format("Teste_Tecnico-Vaga_%1s-CV.pdf", id)).build())).contentType(
+                MediaType.APPLICATION_PDF).body(consultaService.downloadTechnicalTest(id));
     }
 
     @GetMapping("/{id}")
